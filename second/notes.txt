@@ -1,0 +1,5 @@
+local variable: exist in evm memory, not stored between smart contract executions
+  stack variable: simple variables (like an integer) lives in local memory in the evm
+  memory variable: more complex, lives in evm memory but not in stack
+state variable: stored in blockchain, maintained between smart contract invocations, have to pay for the persistence
+  storage: blockchain data

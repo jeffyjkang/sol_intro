@@ -1,0 +1,21 @@
+data:
+  assets: product to be bought by consumer
+  participants: all supply chain participants, (manufacturers, suppliers, shippers, consumers)
+  ownership structure: which participant currently owns product, tracks the product
+  payment token: participants pay each other with tokens as ownership changes
+
+capabilities:
+  token:
+    initialize tokens: establish initial pool of payment tokens
+    transfer tokens: move tokens between accounts as payment
+    authorize token payments: allow token transfers on behalf of another
+  supply chain:
+    add and update participants
+    move product along the supply chain (transfer product ownership)
+    add and update products
+    track an asset (where product is now, find product provenance or ownership)
+
+dApps advantages:
+  automatic history tracking
+  built-in fault tolerance
+  trusted data
