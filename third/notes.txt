@@ -19,3 +19,46 @@ dApps advantages:
   automatic history tracking
   built-in fault tolerance
   trusted data
+
+token contract data items: (scalar variables)
+  header:
+    totSupply: total number of tokens in circulation
+    name:
+    decimals: number of decimals to use when displaying token amounts
+    symbol: short identifier
+    balances: current balance of each participating account, mapped to the account's address
+    allowed: number of tokens authorized to transfer between accounts, mapped to the sender's address
+  body:
+    totalSupply(): returns total number of tokens
+    balanceOf(): returns current balance of specified account
+    allowance(): returns remaining number of tokens allowed to be transferred from one specific account to another specific account
+    transfer(): transfers tokens from the owner to specified target account
+    transferFrom(): transfers tokens from one specific account to another specific account
+    approve(): works with allowance, maximum allowed tokens that can be transferred from one specific account to another specific account
+
+supply chain contracts:
+  product struct - ex: model, part,cost, etc
+  participant struct - ex: username, pw, ether address, etc
+  ownership struct - ex: productId, ownerId, participant_id, transact time, etc
+  functionality:
+    participant: add(), get()
+    product: add(), get()
+    newOwner: transfer of ownership
+    getProvenance(): record of ownership
+    getOwnership(): owner in specific time
+    authenticateParticipant(): confirms participant is allowed to access certain data
+
+implementing events:
+  1. define the event: name, define what happens when event occurs, what type of data is going to be sent
+  2. trigger the event: code that detects when an event occurs, use emit statement
+  3. client side: receives and responds to events
+
+security best practices:
+  consensys.github.io/smart-contract-best-practices
+
+common security mistakes:
+  randomness,
+  re-entrancy: call function forwards after all received gas to prevent multiple withdrawals
+  update state data before transferring control to another function
+  overflow/ underflow: always test for boundary conditions
+  delegation: be careful/ avoid, public/external functions that alter state data
