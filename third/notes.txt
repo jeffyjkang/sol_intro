@@ -62,3 +62,15 @@ common security mistakes:
   update state data before transferring control to another function
   overflow/ underflow: always test for boundary conditions
   delegation: be careful/ avoid, public/external functions that alter state data
+
+solidity events:
+  notify client something happened
+  stored in blockchain
+  costs less
+  can be indexed for easy lookup
+  useful for logging activity
+  only able to index up to 3 parameters
+
+bugs in dApps:
+  syntax errors: compiler will find, compile all code and fix highlighted errors
+  semantics errors: not working as intended

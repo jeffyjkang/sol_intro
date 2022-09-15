@@ -1,0 +1,82 @@
+command to create test in terminal: truffle create test `{Contract}`
+test: truffle test
+
+steps:
+1. write smart contract code and test cases
+2. compile code -> byte code
+3. deploy code to a blockchain -> returns address of code (contract)
+4. run test cases
+5. identify failure causes (bugs) and propose changes to address failures
+6. return to step 1 and repeat process until all failures are addressed
+
+tests:
+overflows/ underflows: check that numbers aren't larger or smaller than allowed
+valid return values: check that each function returns the correct values for caller
+  if calculations are made, check that the answer is correct
+boundary conditions: code can handle data that meets or exceeds expected limits
+iteration limits: test that each loop iterates correctly
+input/output data formats: data provided in unexpected format can still be handled
+input/output data validation: invalid characters are sanitized or rejected
+
+test examples:
+manufacturer
+0x1c107580a026e707d39F216bc53b207fA4a6828C
+0x928Ea8d3Fd3B9E2d20566B57d4C45fEA241fAAd6
+0xC62a6dD98Ba64E68F55C892FB69f1A034Cc2D234
+supplier
+0x554df6b2C12847D8FE35EE6b526fDF9E6925b751
+0xCeBB3E01EF25f455F6099D0062a95713832669aF
+consumer
+0xb8950ca827c2C557E2917A008C47B8E4f790CF7d
+0xE51393DB23c2A2F76Fb6de8669b3be8584fEEaC5
+
+SupplyChain.deployed().then(instance => instance)
+
+// create 3 manufacturer participants (a,b,c)
+// name, pass, participantAddress, participantType
+SupplyChain.deployed().then(instance => instance.addParticipant("a","passA","0x1c107580a026e707d39F216bc53b207fA4a6828C","Manufacturer"))
+SupplyChain.deployed().then(instance => instance.addParticipant("b","passB","0x928Ea8d3Fd3B9E2d20566B57d4C45fEA241fAAd6","Manufacturer"))
+SupplyChain.deployed().then(instance => instance.addParticipant("c","passC","0xC62a6dD98Ba64E68F55C892FB69f1A034Cc2D234","Manufacturer"))
+
+// create 2 supplier participants (d, e)
+SupplyChain.deployed().then(instance => instance.addParticipant("d","passD","0x554df6b2C12847D8FE35EE6b526fDF9E6925b751","Supplier"))
+SupplyChain.deployed().then(instance => instance.addParticipant("e","passE","0xCeBB3E01EF25f455F6099D0062a95713832669aF","Supplier"))
+
+// create 2 consumer participants (f,g)
+SupplyChain.deployed().then(instance => instance.addParticipant("f","passF","0xb8950ca827c2C557E2917A008C47B8E4f790CF7d","Consumer"))
+SupplyChain.deployed().then(instance => instance.addParticipant("g","passG","0xE51393DB23c2A2F76Fb6de8669b3be8584fEEaC5","Consumer"))
+
+// get participant details
+SupplyChain.deployed().then(instance => instance.getParticipant(0))
+SupplyChain.deployed().then(instance => instance.getParticipant(1))
+SupplyChain.deployed().then(instance => instance.getParticipant(2))
+SupplyChain.deployed().then(instance => instance.getParticipant(3))
+SupplyChain.deployed().then(instance => instance.getParticipant(4))
+SupplyChain.deployed().then(instance => instance.getParticipant(5))
+SupplyChain.deployed().then(instance => instance.getParticipant(6))
+
+// create products
+// ownerId, modelNumber, partNumber, serialNumber, productCost
+SupplyChain.deployed().then(instance => instance.addProduct(0, "ABC", "100", "123", 11))
+SupplyChain.deployed().then(instance => instance.addProduct(0, "DEF", "101", "456", 12))
+SupplyChain.deployed().then(instance => instance.addProduct(1, "GHI", "200", "789", 13, {from: "0x928Ea8d3Fd3B9E2d20566B57d4C45fEA241fAAd6"}))
+SupplyChain.deployed().then(instance => instance.addProduct(1, "JKL", "201", "135", 14, {from: "0x928Ea8d3Fd3B9E2d20566B57d4C45fEA241fAAd6"}))
+SupplyChain.deployed().then(instance => instance.addProduct(2, "MNO", "300", "357", 15, {from: "0xC62a6dD98Ba64E68F55C892FB69f1A034Cc2D234"}))
+SupplyChain.deployed().then(instance => instance.addProduct(2, "PQR", "301", "579", 16, {from: "0xC62a6dD98Ba64E68F55C892FB69f1A034Cc2D234"}))
+
+// get product details
+SupplyChain.deployed().then(instance => instance.getProduct(0))
+SupplyChain.deployed().then(instance => instance.getProduct(1))
+SupplyChain.deployed().then(instance => instance.getProduct(2))
+SupplyChain.deployed().then(instance => instance.getProduct(3))
+SupplyChain.deployed().then(instance => instance.getProduct(4))
+SupplyChain.deployed().then(instance => instance.getProduct(5))
+
+
+// move products along supply chain: manufacturer => supplier => consumer
+// newOwner(from, to, prod_id)
+SupplyChain.deployed().then(instance => instance.newOwner(0,3,0, {from: "0x1c107580a026e707d39F216bc53b207fA4a6828C"}))
+SupplyChain.deployed().then(instance => instance.newOwner(3,5,0, {from: "0x554df6b2C12847D8FE35EE6b526fDF9E6925b751"}))
+
+// return provenance
+SupplyChain.deployed().then(instance => instance.getProvenance(0))
