@@ -1,0 +1,9 @@
+https://trufflesuite.com/guides/using-infura-custom-provider/
+1. install hdwallet-provider
+2. config truffle
+3. add ether to testnet via wallet (mm) ropsten
+
+
+// run the usual
+truffle compile (flags/ etc)
+truffle deploy --network (development)
